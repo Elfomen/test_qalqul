@@ -18,7 +18,33 @@ git clone git@github.com:Elfomen/test_qalqul.git
 cd test_qalqul
 ```
 
-### 2. Build and Run the Application
+### 2. Copy vites environments variables
+
+#### 2.1 On Mac OS/Linux
+
+```bash
+cp task1/.env.example task1/.env
+cp task2/.env.example task2/.env
+cp miniproject/.env.example miniproject/.env
+```
+
+### 2.2 On windows cmd
+
+```bash
+copy task1\.env.example task1\.env
+copy task2\.env.example task2\.env
+copy miniproject\.env.example miniproject\.env
+```
+
+### 2.3 On windows power shell
+
+```bash
+Copy-Item -Path task1\.env.example -Destination task1\.env
+Copy-Item -Path task2\.env.example -Destination task2\.env
+Copy-Item -Path miniproject\.env.example -Destination miniproject\.env
+```
+
+### 3. Build and Run the Application
 
 Navigate to the root directory of the project and run the following command to build and start all services:
 
@@ -35,7 +61,11 @@ Map ports for accessing the frontend applications and backend API.
 ### 3. Access the Applications
 
 Task 1: http://localhost:3001
+
 Task 2: http://localhost:3002
+
 Mini Project: http://localhost:3003
-Backend API: http://localhost:3000
-Socket UEL: http://localhost:3008
+
+Backend API: http://localhost:3004
+
+Socket URL: http://localhost:3008

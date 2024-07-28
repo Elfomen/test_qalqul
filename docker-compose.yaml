@@ -2,7 +2,8 @@ services:
   backend:
     build: ./backend
     ports:
-      - "3000:3000"
+      - "3004:3000"
+      - "3008:3008"
     environment:
       - TYPEORM_CONNECTION=mysql
       - TYPEORM_HOST=db
@@ -17,23 +18,23 @@ services:
   frontend1:
     build: ./task1
     ports:
-      - "3001:3000"
+      - "3001:3001"
     environment:
-      - VITE_API_BASE_URL=http://localhost:3000
+      - VITE_API_BASE_URL=http://localhost:3004
 
   frontend2:
     build: ./task2
     ports:
-      - "3002:3000"
+      - "3002:3002"
     environment:
-      - VITE_API_BASE_URL=http://localhost:3000
+      - VITE_API_BASE_URL=http://localhost:3004
 
   frontend3:
     build: ./miniproject
     ports:
-      - "3003:3000"
+      - "3003:3003"
     environment:
-      - VITE_API_BASE_URL=http://localhost:3000
+      - VITE_API_BASE_URL=http://localhost:3004
       - VITE_API_SOCKET_URL=http://localhost:3008
 
   db:
@@ -42,7 +43,7 @@ services:
       - MYSQL_ROOT_PASSWORD=elfomen
       - MYSQL_DATABASE=test_qalqul
     ports:
-      - "3306:3306"
+      - "3309:3306"
     volumes:
       - db-data:/var/lib/mysql
 
