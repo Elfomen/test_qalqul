@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    environment:
+      - TYPEORM_CONNECTION=mysql
+      - TYPEORM_HOST=db
+      - TYPEORM_PORT=3306
+      - TYPEORM_USERNAME=root
+      - TYPEORM_PASSWORD=elfomen
+      - TYPEORM_DATABASE=test_qalqul
+      - TYPEORM_SYNCHRONIZE=true
+    depends_on:
+      - db
+
+  frontend1:
+    build: ./task1
+    ports:
+      - "3001:3000"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:3000
+
+  frontend2:
+    build: ./task2
+    ports:
+      - "3002:3000"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:3000
+
+  frontend3:
+    build: ./miniproject
+    ports:
+      - "3003:3000"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:3000
+      - VITE_API_SOCKET_URL=http://localhost:3008
+
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=elfomen
+      - MYSQL_DATABASE=test_qalqul
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
