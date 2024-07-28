@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/store/task/taskSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Delta } from "quill/core";
@@ -44,7 +45,7 @@ const documentSlice = createSlice({
     },
     createDocumentsRequest: (
       state,
-      action: PayloadAction<{
+      _action: PayloadAction<{
         document: createDocumentPayload;
         callback?: () => void;
       }>
@@ -60,7 +61,7 @@ const documentSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    deleteDocumentRequest: (state, action: PayloadAction<number>) => {
+    deleteDocumentRequest: (state, _action: PayloadAction<number>) => {
       state.loading = true;
       state.error = null;
     },
@@ -77,7 +78,11 @@ const documentSlice = createSlice({
     },
     updateDocumentNameRequest: (
       state,
-      action: PayloadAction<{ id: number; name: string; callback?: () => void }>
+      _action: PayloadAction<{
+        id: number;
+        name: string;
+        callback?: () => void;
+      }>
     ) => {
       state.loading = true;
       state.error = null;

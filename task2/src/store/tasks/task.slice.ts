@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/store/task/taskSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TaskPriorities, TaskStatuses } from "../../components/CreateTaskModal";
@@ -42,7 +43,8 @@ const taskSlice = createSlice({
     },
     createTaskRequest: (
       state,
-      action: PayloadAction<{ task: Omit<Task, "id">; callback?: () => void }>
+      //eslint-disable-next-line @typescript-eslint/no-unused-vars
+      _action: PayloadAction<{ task: Omit<Task, "id">; callback?: () => void }>
     ) => {
       state.loading = true;
       state.error = null;
@@ -57,7 +59,8 @@ const taskSlice = createSlice({
     },
     updateTaskRequest: (
       state,
-      action: PayloadAction<{
+      //eslint-disable-next-line @typescript-eslint/no-unused-vars
+      _action: PayloadAction<{
         status: TaskStatuses;
         callback?: () => void;
         id: number;
@@ -84,7 +87,7 @@ const taskSlice = createSlice({
     },
     deleteTaskRequest: (
       state,
-      action: PayloadAction<{
+      _action: PayloadAction<{
         callback?: () => void;
         id: number;
       }>

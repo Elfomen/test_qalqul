@@ -65,7 +65,7 @@ const TextEditor = () => {
   }, [socket, quill, documentId]);
 
   useEffect(() => {
-    const handler = (delta: Delta, oldDelta: Delta, source: EmitterSource) => {
+    const handler = (delta: Delta, _oldDelta: Delta, source: EmitterSource) => {
       if (source !== "user") return;
       if (socket) {
         socket.emit("updateDocument", { delta, documentId }); // you need to replace the doc id here
@@ -112,7 +112,7 @@ const TextEditor = () => {
       });
       s.disconnect();
     };
-  }, []);
+  }, [documentId]);
 
   useEffect(() => {
     const interval = setInterval(() => {

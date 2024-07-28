@@ -14,8 +14,9 @@ import {
   deleteTaskFailure,
 } from "./task.slice";
 import { API_BASE_URL } from "../../constants";
+import { SagaIterator } from "redux-saga";
 
-function* fetchTasks() {
+function* fetchTasks(): SagaIterator {
   try {
     const response = yield call(fetch, `${API_BASE_URL}/task2/task-list`);
     const data = yield response.json();
@@ -25,7 +26,9 @@ function* fetchTasks() {
   }
 }
 
-function* createTask(action: ReturnType<typeof createTaskRequest>) {
+function* createTask(
+  action: ReturnType<typeof createTaskRequest>
+): SagaIterator {
   try {
     const response = yield call(fetch, `${API_BASE_URL}/task2/task`, {
       method: "POST",
@@ -45,7 +48,9 @@ function* createTask(action: ReturnType<typeof createTaskRequest>) {
   }
 }
 
-function* changeTaskStatus(action: ReturnType<typeof updateTaskRequest>) {
+function* changeTaskStatus(
+  action: ReturnType<typeof updateTaskRequest>
+): SagaIterator {
   try {
     const response = yield call(
       fetch,

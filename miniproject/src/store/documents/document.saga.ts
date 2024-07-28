@@ -14,8 +14,9 @@ import {
   updateDocumentNameRequest,
   updateDocumentNameSuccess,
 } from "./document.slice";
+import { SagaIterator } from "redux-saga";
 
-function* fetchDocuments() {
+function* fetchDocuments(): SagaIterator {
   try {
     const response = yield call(fetch, `${API_BASE_URL}/miniproject/documents`);
     const data = yield response.json();
@@ -25,7 +26,9 @@ function* fetchDocuments() {
   }
 }
 
-function* deleteDocument(action: ReturnType<typeof deleteDocumentRequest>) {
+function* deleteDocument(
+  action: ReturnType<typeof deleteDocumentRequest>
+): SagaIterator {
   try {
     const response = yield call(
       fetch,
@@ -44,7 +47,7 @@ function* deleteDocument(action: ReturnType<typeof deleteDocumentRequest>) {
 
 function* updateDocumentName(
   action: ReturnType<typeof updateDocumentNameRequest>
-) {
+): SagaIterator {
   try {
     const response = yield call(
       fetch,
@@ -71,7 +74,9 @@ function* updateDocumentName(
   }
 }
 
-function* createDocument(action: ReturnType<typeof createDocumentsRequest>) {
+function* createDocument(
+  action: ReturnType<typeof createDocumentsRequest>
+): SagaIterator {
   try {
     const response = yield call(fetch, `${API_BASE_URL}/miniproject/document`, {
       method: "POST",
