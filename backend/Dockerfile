@@ -1,19 +1,19 @@
 # backend/Dockerfile
-FROM node:20
+FROM node:18
 
 # Create and set the working directory
 WORKDIR /app
 
 # Install dependencies
 COPY package.json ./
-COPY package-lock.json ./
-RUN npm install
+COPY yarn.lock ./
+RUN yarn install
 
 # Copy the rest of the application code
 COPY . .
 
 # Build the application
-RUN npm run build
+RUN yarn build
 
 RUN chmod +x ./init.sh
 

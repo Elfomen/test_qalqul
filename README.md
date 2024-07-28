@@ -14,8 +14,8 @@ This project consists of three frontend applications built with React, TypeScrip
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+git clone git@github.com:Elfomen/test_qalqul.git
+cd test_qalqul
 ```
 
 ### 2. Build and Run the Application
@@ -28,9 +28,9 @@ docker-compose up --build
 
 This command will:
 
-    Build Docker images for the backend and each frontend application.
-    Start containers for the backend, frontends, and MySQL database.
-    Map ports for accessing the frontend applications and backend API.
+Build Docker images for the backend and each frontend application.
+Start containers for the backend, frontends, and MySQL database.
+Map ports for accessing the frontend applications and backend API.
 
 ### 3. Access the Applications
 
@@ -38,3 +38,4 @@ Task 1: http://localhost:3001
 Task 2: http://localhost:3002
 Mini Project: http://localhost:3003
 Backend API: http://localhost:3000
+Socket UEL: http://localhost:3008

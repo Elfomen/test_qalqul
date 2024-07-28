@@ -1,4 +1,4 @@
 
-npm run seed
+yarn run seed
 
-npm run start:prod
+yarn start:prod
