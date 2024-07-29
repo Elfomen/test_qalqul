@@ -1,6 +1,6 @@
 import axiosEvent from "../axios";
 
-export const fetchUsers = async (id: number | undefined) => {
+export const fetchUser = async (id: number | undefined) => {
   const result = await axiosEvent.get<{
     email: string;
     name: string;

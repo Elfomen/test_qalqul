@@ -2,6 +2,8 @@ import { Button, Modal, Stack, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { userData } from "../utils/user";
 
+// on first load of the application, we collect the user's name and save it in our local storage
+
 const CollectNameModal: React.FC<{
   open: boolean;
   handleClose: () => void;

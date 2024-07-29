@@ -20,10 +20,11 @@ import {
 } from "../store/documents/document.slice";
 import CollectNameModal from "../components/CollectNameModal";
 import CreateDocumentModal from "../components/CreateDocumentModal";
-import UpdateDocumentNameModal from "../components/UpdaetNameModal";
+import UpdateDocumentNameModal from "../components/UpdateDocumenttNameModal";
 import { useNavigate } from "react-router-dom";
 import { appRoutes } from "../routes";
 import { userData } from "../utils/user";
+
 const Home = () => {
   const dispatch = useDispatch();
   const { loading, error, documents } = useSelector(

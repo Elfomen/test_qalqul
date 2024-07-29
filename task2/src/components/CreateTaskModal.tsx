@@ -16,18 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { createTaskRequest } from "../store/tasks/task.slice";
 import dayjs from "dayjs";
-
-export enum TaskStatuses {
-  todo = "todo",
-  "in-progress" = "in-progress",
-  done = "done",
-}
-
-export enum TaskPriorities {
-  high = "high",
-  medium = "medium",
-  low = "low",
-}
+import { TaskPriorities, TaskStatuses } from "../types";
 
 export interface CreateNewTaskProps {
   name: string;

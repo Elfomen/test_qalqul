@@ -13,18 +13,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { Task, updateTaskRequest } from "../store/tasks/task.slice";
-
-export enum TaskStatuses {
-  todo = "todo",
-  "in-progress" = "in-progress",
-  done = "done",
-}
-
-export enum TaskPriorities {
-  high = "high",
-  medium = "medium",
-  low = "low",
-}
+import { TaskStatuses } from "../types";
 
 const ChangeTaskStatusModal: React.FC<{
   open: boolean;

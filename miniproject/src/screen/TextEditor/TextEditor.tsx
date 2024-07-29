@@ -9,6 +9,7 @@ import { io, Socket } from "socket.io-client";
 import { API_SOCKET_URL } from "../../constants";
 import { userData } from "../../utils/user";
 import "./styles.css";
+import CollectNameModal from "../../components/CollectNameModal";
 
 const TOOL_BAR_OPTIONS = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -28,11 +29,24 @@ const TextEditor = () => {
   const { id: documentId } = useParams();
   const [connectedUsers, setConnectedUsers] = useState<string[]>([]);
 
+  const [isNameModalOpened, setIsNameModalOpened] = useState(false);
+
   const [quill, setQuill] = useState<Quill>();
 
-  // this prevents the quil reach textbox to render multiple times
+  const handleModalClose = () => {
+    setIsNameModalOpened(false);
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    if (!userData.getUsername()) {
+      setIsNameModalOpened(true);
+    }
+  }, []);
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const wrapperRef = useCallback((wrapper: any) => {
+    // this prevents the quil reach textbox to render multiple times
     if (wrapper === null) return;
     wrapper.innerHTML = "";
     const editor = document.createElement("div");
@@ -47,7 +61,7 @@ const TextEditor = () => {
   }, []);
 
   useEffect(() => {
-    if (!socket || !quill) return;
+    if (!socket || !quill || !userData.getUsername()) return;
 
     socket.once(
       "loadDocument",
@@ -68,7 +82,7 @@ const TextEditor = () => {
     const handler = (delta: Delta, _oldDelta: Delta, source: EmitterSource) => {
       if (source !== "user") return;
       if (socket) {
-        socket.emit("updateDocument", { delta, documentId }); // you need to replace the doc id here
+        socket.emit("updateDocument", { delta, documentId });
       }
     };
     quill?.on("text-change", handler);
@@ -92,6 +106,8 @@ const TextEditor = () => {
   }, [socket, quill]);
 
   useEffect(() => {
+    if (!userData.getUsername()) return;
+
     const s = io(`${API_SOCKET_URL}`, {
       query: {
         name: userData.getUsername(),
@@ -123,6 +139,12 @@ const TextEditor = () => {
   }, [socket, quill, documentId]);
   return (
     <>
+      {isNameModalOpened && (
+        <CollectNameModal
+          handleClose={handleModalClose}
+          open={isNameModalOpened}
+        />
+      )}
       <div className="avtiveUsers">
         <center>
           <Button
@@ -133,8 +155,8 @@ const TextEditor = () => {
             <Download />
           </Button>
           <Typography variant="h5">Active Users</Typography>
-          {connectedUsers.map((user) => (
-            <ActiveUserBadge username={user} />
+          {connectedUsers.map((user, index) => (
+            <ActiveUserBadge key={index} username={user} />
           ))}
         </center>
       </div>
@@ -154,7 +176,7 @@ const ActiveUserBadge: React.FC<{ username: string }> = ({ username }) => {
         backgroundColor: colors[Math.floor(Math.random() * colors.length - 1)],
       }}
     >
-      <p>{username.slice(0, 3)}</p>
+      <p>{username?.slice(0, 3)}</p>
     </div>
   );
 };

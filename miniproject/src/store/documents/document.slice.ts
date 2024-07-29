@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// src/store/task/taskSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Delta } from "quill/core";
 

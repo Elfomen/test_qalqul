@@ -1,6 +1,5 @@
 import {
   OnGatewayConnection,
-  OnGatewayDisconnect,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
@@ -15,9 +14,7 @@ import { MiniprojectService } from './miniproject.service';
     allowedHeaders: 'Content-Type, Authorization',
   },
 })
-export class MiniprojectGateway
-  implements OnGatewayConnection, OnGatewayDisconnect
-{
+export class MiniprojectGateway implements OnGatewayConnection {
   constructor(private miniProjectService: MiniprojectService) {}
 
   @WebSocketServer() server: Server;
@@ -29,11 +26,7 @@ export class MiniprojectGateway
     this.clients.set(`${documentId}_${name}`, `${name}`);
   }
 
-  handleDisconnect(client: Socket) {
-    this.clients.delete(client.id);
-    this.updateOnlineUsers();
-  }
-
+  // This saves the content of a document in the data base
   @SubscribeMessage('saveDocument')
   async handleSaveDocument(client: Socket, data) {
     await this.miniProjectService.updateDocumentContent(
@@ -42,6 +35,7 @@ export class MiniprojectGateway
     );
   }
 
+  // remove a user from the list of users actively editing a document when he disconnects
   @SubscribeMessage('onLeaveDocument')
   handleDocumentLeave(
     client: Socket,
@@ -51,11 +45,13 @@ export class MiniprojectGateway
     this.updateOnlineUsers(`${data.documentId}`);
   }
 
+  // broadcast the changes a user made on a document to other users actively modifying the same document
   @SubscribeMessage('updateDocument')
   handleUpdateDocument(client: Socket, data) {
     client.broadcast.to(data.documentId).emit('receivedChanges', data.delta);
   }
 
+  // when a user ask to edit a document
   @SubscribeMessage('getDocument')
   async handleGetDocument(
     client: Socket,
@@ -65,6 +61,7 @@ export class MiniprojectGateway
     client.join(`${dat.documentId}`);
     this.clients.set(`${dat.documentId}_${dat.username}`, dat.username);
     this.updateOnlineUsers(`${dat.documentId}`);
+    // if the loaded document exists, we send it back to the user
     if (data) {
       client.emit('loadDocument', {
         delta: JSON.parse(data.data),
@@ -73,15 +70,15 @@ export class MiniprojectGateway
     }
   }
 
+  // returns users actively editing a document
   getDocumentActiveUsers(documentId: string) {
-    console.log(this.clients);
-
     const users = Array.from(this.clients)
       .filter(([key]) => key.split('_')[0] === documentId)
       .map(([, value]) => value);
     return users;
   }
 
+  // update users when another editor connect or disconnect
   updateOnlineUsers(docId?: string): void {
     const onlineUsers = this.getDocumentActiveUsers(docId);
     if (docId) {

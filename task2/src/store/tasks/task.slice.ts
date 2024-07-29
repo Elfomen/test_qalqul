@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// src/store/task/taskSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TaskPriorities, TaskStatuses } from "../../components/CreateTaskModal";
+import { TaskPriorities, TaskStatuses } from "../../types";
 
 export interface Task {
   id: number;

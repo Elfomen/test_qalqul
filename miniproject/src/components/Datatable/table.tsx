@@ -10,8 +10,8 @@ import * as React from "react";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.common.black,
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -37,8 +37,10 @@ const AppDataTable: React.FC<{
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            {columns.map((column) => (
-              <StyledTableCell>{column}</StyledTableCell>
+            {columns.map((column, index) => (
+              <StyledTableCell key={`${column}_${index}`}>
+                {column}
+              </StyledTableCell>
             ))}
           </TableRow>
         </TableHead>

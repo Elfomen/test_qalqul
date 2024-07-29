@@ -7,7 +7,7 @@ This project consists of three frontend applications built with React, TypeScrip
 ## Prerequisites
 
 - **Docker**: Ensure Docker and Docker Compose are installed. You can download them from [Docker's official website](https://www.docker.com/products/docker-desktop).
-- **Node.js**: Required for building and running the frontend and backend applications (usually installed with Docker).
+- **Node.js**: Required for building and running the frontend and backend applications. You do not need to install this (usually installed with Docker).
 
 ## Setup
 
@@ -46,7 +46,7 @@ Copy-Item -Path miniproject\.env.example -Destination miniproject\.env
 
 ### 3. Build and Run the Application
 
-Navigate to the root directory of the project and run the following command to build and start all services:
+Make sure your terminal is pointing at the root of the project and run the following command to build and start all services:
 
 ```bash
 docker-compose up --build
