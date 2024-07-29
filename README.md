@@ -49,7 +49,7 @@ Copy-Item -Path miniproject\.env.example -Destination miniproject\.env
 Make sure your terminal is pointing at the root of the project and run the following command to build and start all services:
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 This command will:
